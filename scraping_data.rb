@@ -41,7 +41,7 @@ for i in 0..count do
   end
 
   datas.push(data)
-  puts datas
+  puts datas # debug
 end
 
 data_count = datas.length
