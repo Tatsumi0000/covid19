@@ -2,6 +2,9 @@ name: scraping news
 on:
   schedule:
   - cron: '0 */6 * * *'
+  push:
+    branches:
+      - development
 jobs:
   scraping:
     runs-on: ubuntu-latest
