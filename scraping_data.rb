@@ -41,6 +41,7 @@ for i in 0..count do
   end
 
   datas.push(data)
+  puts datas
 end
 
 data_count = datas.length
