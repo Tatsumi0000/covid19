@@ -30,21 +30,7 @@ jobs:
         bundle update --bundler
         bundle install
         ruby scraping.rb
-    - name: Create Pull Request
-      id: cpr
-      uses: peter-evans/create-pull-request@v2
-      with:
-        commit-message: 'Update news.json'
-        branch: news
-        base: master
-        labels: auto_merge
-        branch-suffix: timestamp
-        title: '最新のお知らせ更新'
-        body: '公式サイトのお知らせが更新されました。差分を確認してマージしてください。'
-        token: ${{ secrets.BOT_TOKEN }}
-    # ここから下はお知らせに差分があった場合のみ実行する
-    - uses: actions/checkout@v2
-      if: steps.cpr.outputs.pr_number != 0
+
     - name: Scraping Data
       env:
         URL: "https://www.pref.miyazaki.lg.jp/kenko/hoken/kansensho/covid19/hassei.html"
@@ -52,16 +38,4 @@ jobs:
         TZ: Asia/Tokyo
       run: |
         ruby scraping_data.rb
-      if: steps.cpr.outputs.pr_number != 0
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v2
-      with:
-        commit-message: 'Update data.json'
-        branch: data
-        base: master
-        # labels: auto_merge
-        branch-suffix: timestamp
-        title: '陽性患者数更新'
-        body: '公式サイトの情報が更新されました。差分を確認してマージしてください。'
-        token: ${{ secrets.BOT_TOKEN }}
-      if: steps.cpr.outputs.pr_number != 0
+
