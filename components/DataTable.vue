@@ -6,7 +6,7 @@
     <v-data-table
       :ref="'displayedTable'"
       :headers="chartData.headers"
-      :items="reverseData(chartData.datasets)"
+      :items="chartData.datasets"
       :items-per-page="-1"
       :hide-default-footer="true"
       :height="240"
@@ -164,11 +164,6 @@ export default Vue.extend({
     tables.forEach((table: HTMLElement) => {
       table.setAttribute('tabindex', '0')
     })
-  },
-  methods: {
-    reverseData(data: any) {
-      return data.slice().reverse()
-    }
   }
 })
 </script>
